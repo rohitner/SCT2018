@@ -1,2 +1,5 @@
 *.pyc
 activate
+sochack/
+node_modules/
+dist/
