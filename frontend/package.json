@@ -1,30 +1,27 @@
 {
+  "name": "acme-app",
+  "description": "A Vue.js project",
+  "version": "1.0.0",
+  "author": "i_am_invisible <samuel.james@venturegardengroup.com>",
   "private": true,
-  "name": "Sochack",
-  "productName": "Sochack",
-  "description": "My smashing Vue project",
-  "version": "0.0.0",
-  "license": "MIT",
   "scripts": {
-    "dev": "poi",
-    "build": "poi build",
-    "report": "poi build --bundle-report",
-    "serve": "serve dist --single"
-  },
-  "author": {
-    "name": "dibyadas",
-    "email": "dibyadascool@gmail.com"
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
-    "normalize.css": "^7.0.0",
-    "object-assign": "^4.1.1",
-    "offline-plugin": "^4.8.0",
-    "promise-polyfill": "^6.0.2"
+    "jquery": "^3.3.1",
+    "vue": "^2.4.4"
   },
   "devDependencies": {
-    "poi": "^9.6.13",
-    "poi-preset-bundle-report": "^2.0.0",
-    "poi-preset-offline": "^9.0.0",
-    "serve": "^6.1.0"
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "cross-env": "^5.0.5",
+    "css-loader": "^0.28.7",
+    "file-loader": "^1.1.4",
+    "vue-loader": "^13.0.5",
+    "vue-template-compiler": "^2.4.4",
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.9.1"
   }
 }
