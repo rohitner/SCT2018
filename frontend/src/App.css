@@ -1,0 +1,40 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.text{
+  text-align: center;
+  padding: 10%;
+}
+.status-message {
+  position: fixed;
+  padding: 2mm;
+  top: 10px;
+  left: 50%;
+  transform: translateX(500%);
+  color: #fff;
+  font-size: 1rem;
+  background: #18192b;
+  border-radius: 30px;
+  border: 2px solid #3c3e63;
+}
