@@ -4,6 +4,7 @@ CE31501 Term Project Group 4
 
 #### To run:-
 
-`cd` into `frontend/` and run `yarn dev`
+`cd` into `frontend/` and run `yarn start` to start the development server
+`yarn build` to bundle the static files 
 
 And in another terminal, run `python3 backend/app.py`
