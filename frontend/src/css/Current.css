@@ -1,0 +1,6 @@
+.Current {
+    display: flex;
+    padding-top: 5%;
+    position: relative;
+    transform: translateX(40%);
+}

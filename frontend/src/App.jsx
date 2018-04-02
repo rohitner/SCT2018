@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Current from './components/Current';
 
 class App extends Component {
   constructor() {
@@ -17,6 +18,7 @@ class App extends Component {
           <div>Smart, Neuro-Fuzzy system based app that takes care of your mental and social health</div>
         </header>
         <div className="status-message"> {this.state.status} </div>
+        <Current />
         <div className="text">
           Something is really good!
         </div>
