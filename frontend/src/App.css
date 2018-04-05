@@ -27,11 +27,16 @@
   padding: 10%;
 }
 .status-message {
+  display: flex;
   position: fixed;
   padding: 2mm;
-  top: 10px;
+  /* top: 40%; */
+  top: 5mm;
   left: 50%;
-  transform: translateX(500%);
+  transform: translate(-50%,-50%);
+  /* transform: translateX(500%); */
+  /* position: center; */
+
   color: #fff;
   font-size: 1rem;
   background: #18192b;

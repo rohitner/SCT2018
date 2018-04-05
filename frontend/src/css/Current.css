@@ -1,6 +1,7 @@
 .Current {
-    display: flex;
-    padding-top: 5%;
-    position: relative;
-    transform: translateX(40%);
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%,-50%);
+    
 }
