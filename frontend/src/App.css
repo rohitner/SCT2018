@@ -1,5 +1,11 @@
 .App {
   text-align: center;
+  font-family: 'Titillium Web', sans-serif;
+  /* background: linear-gradient(to bottom, indigo, white); */
+  /* background: linear-gradient(to right, #355C7D, #6C5B7B, #C06C84 ); */
+  background: linear-gradient(to top, #e8cbc0, #636fa4);
+  /* background: linear-gradient(to top, #283048, #859398); */
+  color: white;
 }
 
 .App-logo {
@@ -8,10 +14,9 @@
 }
 
 .App-header {
-  background-color: #222;
+
   height: 150px;
   padding: 20px;
-  color: white;
 }
 
 .App-title {
@@ -24,18 +29,16 @@
 
 .text{
   text-align: center;
-  padding: 10%;
+  padding: 2%;
 }
 .status-message {
-  display: flex;
+  display: none;
   position: fixed;
   padding: 2mm;
-  /* top: 40%; */
+
   top: 5mm;
   left: 50%;
   transform: translate(-50%,-50%);
-  /* transform: translateX(500%); */
-  /* position: center; */
 
   color: #fff;
   font-size: 1rem;
