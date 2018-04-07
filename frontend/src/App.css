@@ -3,9 +3,10 @@
   font-family: 'Titillium Web', sans-serif;
   /* background: linear-gradient(to bottom, indigo, white); */
   /* background: linear-gradient(to right, #355C7D, #6C5B7B, #C06C84 ); */
-  background: linear-gradient(to top, #e8cbc0, #636fa4);
+  background: linear-gradient(to top, #e8cbc0 4%, #636fa4);
   /* background: linear-gradient(to top, #283048, #859398); */
   color: white;
+  font-size: 130%;
 }
 
 .App-logo {
@@ -32,17 +33,25 @@
   padding: 2%;
 }
 .status-message {
-  display: none;
+  /* display: flex; */
   position: fixed;
   padding: 2mm;
-
-  top: 5mm;
-  left: 50%;
-  transform: translate(-50%,-50%);
+  text-align: left;
+  top: 2mm;
+  left: 2mm;
+  /* transform: translate(-50%,-50%); */
 
   color: #fff;
   font-size: 1rem;
   background: #18192b;
   border-radius: 30px;
   border: 2px solid #3c3e63;
+}
+
+.logout {
+  /* display: inline; */
+  padding: 1%;
+  text-align: right;
+  /* left: 100%; */
+  /* transform: translate(-50%); */
 }

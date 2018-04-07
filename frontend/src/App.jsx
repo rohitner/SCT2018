@@ -15,10 +15,15 @@ class App extends Component {
       userId: 'null'
     }
     this.handleLogin = this.handleLogin.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   handleLogin(flag, username) {
-    this.setState({ loggedIn: flag, userId: username});
+    this.setState({ loggedIn: flag, userId: username, status: 'Welcome '+username});
+  }
+
+  handleLogout() {
+    this.setState({ loggedIn: false, userId: 'null', status: 'Just Started'});
   }
 
   render() {
@@ -26,7 +31,11 @@ class App extends Component {
       <div className="App">
 
       <div className="status-message">{this.state.status} </div>
-
+      {
+        this.state.loggedIn ? ( <div className='logout' ><button onClick={this.handleLogout} > Logout </button></div> )
+      : (null)
+      }
+      
         <header className="App-header">
           <h1 className="App-title">Sochack</h1>
           <div>Smart, Neuro-Fuzzy system based app that takes care of your mental and social health</div>
