@@ -5,11 +5,15 @@
   "dependencies": {
     "axios": "^0.18.0",
     "buildo-react-components": "^0.36.0",
+    "pure-react-carousel": "^1.11.1",
     "react": "^16.3.0",
+    "react-alice-carousel": "^1.9.2",
     "react-dom": "^16.3.0",
-    "react-scripts": "1.1.1"
+    "react-scripts": "1.1.1",
+    "react-slick": "^0.23.1",
+    "styled-jss": "^2.2.2"
   },
-  "homepage" : "http://dibyadas.github.io/sochack-site",
+  "homepage": "http://dibyadas.github.io/sochack-site",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

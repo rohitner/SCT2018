@@ -1,0 +1,6 @@
+.buttons {
+    display: flex;
+    padding: 2%;
+    justify-content: space-around;
+}
+

@@ -1,12 +1,36 @@
-.App {
+body {
   text-align: center;
-  font-family: 'Titillium Web', sans-serif;
-  /* background: linear-gradient(to bottom, indigo, white); */
-  /* background: linear-gradient(to right, #355C7D, #6C5B7B, #C06C84 ); */
-  background: linear-gradient(to top, #e8cbc0 4%, #636fa4);
+  /* font-family: 'Titillium Web', sans-serif; */
+  /* font-family: 'spotify-circular', sans-serif; */
+  font-family: 'Open Sans', sans-serif;
+  background: linear-gradient(5deg, #9869bd, #1e3264, #ac5d3f, #c4cde4);
+  background-size: 800% 800%;
+  
+  -webkit-animation: AnimationName 18s ease infinite;
+  -moz-animation: AnimationName 18s ease infinite;
+  animation: AnimationName 18s ease infinite;
   /* background: linear-gradient(to top, #283048, #859398); */
-  color: white;
-  font-size: 130%;
+  color: black;
+  font-size: 110%;
+  font-weight: 400;
+  
+}
+
+@-webkit-keyframes AnimationName {
+  0%{background-position:99% 0%}
+  50%{background-position:2% 100%}
+  100%{background-position:99% 0%}
+}
+
+@-moz-keyframes AnimationName {
+  0%{background-position:99% 0%}
+  50%{background-position:2% 100%}
+  100%{background-position:99% 0%}
+}
+@keyframes AnimationName {
+  0%{background-position:99% 0%}
+  50%{background-position:2% 100%}
+  100%{background-position:99% 0%}
 }
 
 .App-logo {
@@ -21,7 +45,7 @@
 }
 
 .App-title {
-  font-size: 1.5em;
+  font-size: 5% 2em;
 }
 
 .App-intro {
@@ -40,7 +64,6 @@
   top: 2mm;
   left: 2mm;
   /* transform: translate(-50%,-50%); */
-
   color: #fff;
   font-size: 1rem;
   background: #18192b;
@@ -54,4 +77,25 @@
   text-align: right;
   /* left: 100%; */
   /* transform: translate(-50%); */
+}
+
+.Content{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  padding-left: 5%;
+  padding-right: 5%;
+  /* flex-wrap: wrap; */
+}
+.Lorem {
+  flex: 2;
+}
+.Reddit {
+  /* max-width: 30%; */
+  flex: 3;
+}
+
+.Login {
+  flex: 4;
 }

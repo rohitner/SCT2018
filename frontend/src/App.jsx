@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Current from './components/Current';
 import Login from './components/Login';
+import Reddit from './components/Reddit';
 // import axios from 'axios';
 
 class App extends Component {
@@ -12,10 +13,12 @@ class App extends Component {
       status: "Just Started",
       curract: {mental: 'null', social: 'null'},
       loggedIn: false,
-      userId: 'null'
+      userId: 'null',
     }
+
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
+
   }
 
   handleLogin(flag, username) {
@@ -28,7 +31,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App" >
 
       <div className="status-message">{this.state.status} </div>
       {
@@ -37,16 +40,22 @@ class App extends Component {
       }
       
         <header className="App-header">
-          <h1 className="App-title">Sochack</h1>
+          <h1 className="App-title"><b>Sochack</b></h1>
           <div>Smart, Neuro-Fuzzy system based app that takes care of your mental and social health</div>
         </header>
+        <div className='Content'>
+        <div className='Lorem'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat maxime, necessitatibus perferendis odio atque voluptatum iste, earum fugiat praesentium vero libero, esse quas? Facilis fugit quod, iure dolorem harum cumque. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi qui doloribus ab nihil quasi. Necessitatibus corrupti tempore dolorum expedita natus alias facere distinctio sit quis hic, obcaecati harum quae voluptate!</div>
+        <div className='Login'>
         { !this.state.loggedIn ? 
             <Login handleLogin={this.handleLogin} />
           : <Current activity={this.state.curract}  /> 
-        } 
-        <div style={{'paddingTop': '2%'}} >You are in good hands :)</div>
-        <div style={{'paddingTop': '26%'}}></div>
+        }
+        </div>
+        <div className='Reddit'><Reddit /></div>
       </div>
+      <div style={{'paddingTop': '25%'}}></div>
+      </div>
+      
     );
   }
 }
