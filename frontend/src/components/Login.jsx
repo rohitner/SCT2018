@@ -21,7 +21,7 @@ class Login extends Component {
     }
 
     handleSubmit(event) {  
-        this.props.handleLogin(true,'dibyadas');
+        this.props.handleLogin(true,this.state.username);
     }
 
     render() {
