@@ -87,8 +87,6 @@ def calculate_health(Y):
 	percentage.compute()
 	z = percentage.output['health']
 
-	print z
-
 	return z
 
 def calculate_work(Y):
@@ -138,7 +136,7 @@ def calculate_social(Y):
 
 	interaction['L'] = fuzz.trapmf(interaction.universe, [  0,  0, 460, 720])             #change the vlaues
 	interaction['M'] = fuzz.trapmf(interaction.universe, [310,570, 870,1130])
-	interaction['H'] = fuzz.trapmf(interaction,universe, [720,980,1440,1440])
+	interaction['H'] = fuzz.trapmf(interaction.universe, [720,980,1440,1440])
 	online['L']      = fuzz.trapmf(		online.universe, [  0,  0,  30,  45])                          #change the values
 	online['M']      = fuzz.trapmf(		online.universe, [ 30, 45,  75,  90])
 	online['H']      = fuzz.trapmf(		online.universe, [ 80,100,1440,1440])	
@@ -162,8 +160,8 @@ def calculate_social(Y):
 
 	percentage = ctrl.ControlSystemSimulation(social_calc)
 	
-	percentage.input['tech'] = get_total_sum(Y[0])
-	percentage.input['leisure'] = get_total_sum(Y[1])
+	percentage.input['interaction'] = get_total_sum(Y[0])
+	percentage.input['online'] = get_total_sum(Y[1])
 	percentage.compute()
 	z = percentage.output['social']
 	
@@ -233,9 +231,9 @@ def calculate_total(Y):
 
 def calculate(Y):
 
-	health = calculate_health(Y[0:2])
-	work   = calculate_work(Y[3:4])
-	social = calculate_social(Y[4:5])
+	health = calculate_health(Y[0])
+	work   = calculate_work(Y[1])
+	social = calculate_social(Y[2])
 	total  = calculate_total([health, work, social])
 
 	return total
@@ -258,7 +256,14 @@ def main():
 		uuid = bfile[i]
 		print uuid
 		(X,Y,M,timestamps,feature_names,label_names) = read_user_data(uuid)
-		ans = calculate([[1],[1],[1],[1],[1],[1],[1],[1],[1]]) # erraneous
+		ans = calculate([[Y[:,label_names.index('SLEEPING')],
+						  Y[:,label_names.index('EATING')],
+						  Y[:,label_names.index('FIX_walking')]],
+						 [Y[:,label_names.index('COMPUTER_WORK')],
+						  Y[:,label_names.index('SINGING')]],
+						 [Y[:,label_names.index('WITH_FRIENDS')],
+						  Y[:,label_names.index('SURFING_THE_INTERNET')]]])
+		print ans
 
 if __name__ == '__main__':
 	main()
