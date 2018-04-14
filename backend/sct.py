@@ -29,98 +29,101 @@ def get_total_sum(data):
 
 def calculate_health(Y):
 
-	sleep = ctrl.Antecedent(np.arange(0, 1440, 1), 'sleep')
-	eat = ctrl.Antecedent(np.arange(0, 100, 1), 'eat')
+	sleep    = ctrl.Antecedent(np.arange(0, 1440, 1),    'sleep')
+	eat 	 = ctrl.Antecedent(np.arange(0,  100, 1),      'eat')
 	exercise = ctrl.Antecedent(np.arange(0, 1440, 1), 'exercise')
-	health = ctrl.Consequent(np.arange(0, 100, 1), 'health')
+	health   = ctrl.Consequent(np.arange(0,  100, 1),   'health')
 
-	sleep['low'] = fuzz.trapmf(sleep.universe, [0, 0, 460, 720])
-	sleep['medium'] = fuzz.trapmf(sleep.universe, [310,570,870,1130])
-	sleep['high'] = fuzz.trapmf(sleep.universe, [720,980,1440,1440])
-	eat['low'] = fuzz.trapmf(eat.universe, [0,0,30,45])                              #change the values
-	eat['medium'] = fuzz.trapmf(eat.universe, [30,45,75,90])
-	eat['high'] = fuzz.trapmf(eat.universe, [80,100,1440,1440])	
-	exercise['low'] = fuzz.trapmf(exercise.universe, [0,0,30,45])
-	exercise['medium'] = fuzz.trapmf(exercise.universe, [30,45,75,90])
-	exercise['high'] = fuzz.trapmf(exercise.universe, [80,100,1440,1440])
-	health['low'] = fuzz.trapmf(health.universe, [0,0,30,50])
-	health['medium'] = fuzz.trapmf(health.universe, [5,35,65,90])
-	health['high'] = fuzz.trapmf(health.universe, [50,70,100, 100])
+	sleep['L']    = fuzz.trapmf(   sleep.universe, [  0,  0, 460, 720])
+	sleep['M']    = fuzz.trapmf(   sleep.universe, [310,570, 870,1130])
+	sleep['H']    = fuzz.trapmf(   sleep.universe, [720,980,1440,1440])
+	eat['L']      = fuzz.trapmf(  	 eat.universe, [  0,  1,   1,   2])
+	eat['M']      = fuzz.trapmf(     eat.universe, [  1,  2,   4,   5])
+	eat['H']      = fuzz.trapmf(     eat.universe, [  4,  6, 100, 100])	
+	exercise['L'] = fuzz.trapmf(exercise.universe, [  0,  0,  30,  45])
+	exercise['M'] = fuzz.trapmf(exercise.universe, [ 30, 45,  75,  90])
+	exercise['H'] = fuzz.trapmf(exercise.universe, [ 80,100,1440,1440])
+	health['L']   = fuzz.trapmf(  health.universe, [  0,  0,  30,  50])
+	health['M']   = fuzz.trapmf(  health.universe, [ 30, 40,  60,  70])
+	health['H']   = fuzz.trapmf(  health.universe, [ 60, 80, 100, 100])
 
-	rule1 = ctrl.Rule(sleep['high'] & eat['high'] & exercise['high'], health['high'])
-	rule2 = ctrl.Rule(sleep['high'] & eat['high'] & exercise['medium'], health['high'])
-	rule3 = ctrl.Rule(sleep['high'] & eat['medium'] & exercise['high'], health['high'])
-	rule4 = ctrl.Rule(sleep['medium'] & eat['high'] & exercise['high'], health['high'])
-	
-	rule5 = ctrl.Rule(sleep['medium'] & eat['medium'] & exercise['medium'], health['medium'])
-	rule6 = ctrl.Rule(sleep['high'] & eat['medium'] & exercise['medium'], health['medium'])
-	rule7 = ctrl.Rule(sleep['medium'] & eat['high'] & exercise['medium'], health['medium'])
-	rule8 = ctrl.Rule(sleep['medium'] & eat['medium'] & exercise['high'], health['medium'])
-	rule9 = ctrl.Rule(sleep['high'] & eat['high'] & exercise['low'], health['medium'])
-	rule10 = ctrl.Rule(sleep['low'] & eat['high'] & exercise['high'], health['medium'])
-	rule11 = ctrl.Rule(sleep['high'] & eat['low'] & exercise['high'], health['medium'])
-	rule12 = ctrl.Rule(sleep['high'] & eat['low'] & exercise['low'], health['medium'])
-	rule13 = ctrl.Rule(sleep['low'] & eat['high'] & exercise['low'], health['medium'])
-	rule14 = ctrl.Rule(sleep['low'] & eat['low'] & exercise['high'], health['medium'])
-	rule15 = ctrl.Rule(sleep['high'] & eat['medium'] & exercise['low'], health['medium'])
-	rule16 = ctrl.Rule(sleep['high'] & eat['low'] & exercise['medium'], health['medium'])
-	rule17 = ctrl.Rule(sleep['medium'] & eat['high'] & exercise['low'], health['medium'])
-	rule18 = ctrl.Rule(sleep['medium'] & eat['low'] & exercise['high'], health['medium'])
-	rule19 = ctrl.Rule(sleep['low'] & eat['high'] & exercise['medium'], health['medium'])
-	rule20 = ctrl.Rule(sleep['low'] & eat['medium'] & exercise['high'], health['medium'])
-	rule21 = ctrl.Rule(sleep['low'] & eat['medium'] & exercise['medium'], health['medium'])
-	rule22 = ctrl.Rule(sleep['medium'] & eat['medium'] & exercise['low'], health['medium'])
-	rule23 = ctrl.Rule(sleep['medium'] & eat['low'] & exercise['medium'], health['medium'])
+	rule = []
 
-	rule24 = ctrl.Rule(sleep['low'] & eat['low'] & exercise['low'], health['low'])
-	rule25 = ctrl.Rule(sleep['low'] & eat['low'] & exercise['medium'], health['low'])
-	rule26 = ctrl.Rule(sleep['medium'] & eat['low'] & exercise['low'], health['low'])
-	rule27 = ctrl.Rule(sleep['low'] & eat['medium'] & exercise['low'], health['low'])
+	rule = np.append(rule,ctrl.Rule(exercise['L'] & sleep['L'] & eat['L'], health['L']))
+	rule = np.append(rule,ctrl.Rule(exercise['M'] & sleep['L'] & eat['L'], health['L']))
+	rule = np.append(rule,ctrl.Rule(exercise['H'] & sleep['L'] & eat['L'], health['L']))
+	rule = np.append(rule,ctrl.Rule(exercise['L'] & sleep['M'] & eat['L'], health['L']))
+	rule = np.append(rule,ctrl.Rule(exercise['M'] & sleep['M'] & eat['L'], health['M']))
+	rule = np.append(rule,ctrl.Rule(exercise['H'] & sleep['M'] & eat['L'], health['M']))
+	rule = np.append(rule,ctrl.Rule(exercise['L'] & sleep['H'] & eat['L'], health['L']))
+	rule = np.append(rule,ctrl.Rule(exercise['M'] & sleep['H'] & eat['L'], health['M']))
+	rule = np.append(rule,ctrl.Rule(exercise['H'] & sleep['H'] & eat['L'], health['M']))
+	rule = np.append(rule,ctrl.Rule(exercise['L'] & sleep['L'] & eat['M'], health['L']))
+	rule = np.append(rule,ctrl.Rule(exercise['M'] & sleep['L'] & eat['M'], health['M']))
+	rule = np.append(rule,ctrl.Rule(exercise['H'] & sleep['L'] & eat['M'], health['M']))
+	rule = np.append(rule,ctrl.Rule(exercise['L'] & sleep['M'] & eat['M'], health['M']))
+	rule = np.append(rule,ctrl.Rule(exercise['M'] & sleep['M'] & eat['M'], health['H']))
+	rule = np.append(rule,ctrl.Rule(exercise['H'] & sleep['M'] & eat['M'], health['H']))
+	rule = np.append(rule,ctrl.Rule(exercise['L'] & sleep['H'] & eat['M'], health['M']))
+	rule = np.append(rule,ctrl.Rule(exercise['M'] & sleep['H'] & eat['M'], health['H']))
+	rule = np.append(rule,ctrl.Rule(exercise['H'] & sleep['H'] & eat['M'], health['H']))
+	rule = np.append(rule,ctrl.Rule(exercise['L'] & sleep['L'] & eat['H'], health['L']))
+	rule = np.append(rule,ctrl.Rule(exercise['M'] & sleep['L'] & eat['H'], health['M']))
+	rule = np.append(rule,ctrl.Rule(exercise['H'] & sleep['L'] & eat['H'], health['M']))
+	rule = np.append(rule,ctrl.Rule(exercise['L'] & sleep['M'] & eat['H'], health['M']))
+	rule = np.append(rule,ctrl.Rule(exercise['M'] & sleep['M'] & eat['H'], health['H']))
+	rule = np.append(rule,ctrl.Rule(exercise['H'] & sleep['M'] & eat['H'], health['H']))
+	rule = np.append(rule,ctrl.Rule(exercise['L'] & sleep['H'] & eat['H'], health['M']))
+	rule = np.append(rule,ctrl.Rule(exercise['M'] & sleep['H'] & eat['H'], health['H']))
+	rule = np.append(rule,ctrl.Rule(exercise['H'] & sleep['H'] & eat['H'], health['H']))
 
-	health_calc = ctrl.ControlSystem([rule1, rule2, rule3, rule4, rule5, rule6, rule7, rule8, rule9,
-					rule10, rule11, rule12, rule13, rule14, rule15, rule16, rule17, rule18, rule19,
-					rule20, rule21, rule22, rule23, rule24, rule25, rule26, rule27 ])
+	health_calc = ctrl.ControlSystem(rule)
+
 	print "rule base done"
 	percentage = ctrl.ControlSystemSimulation(health_calc)
 	print "control system defined"
-	percentage.input['sleep'] = get_total_sum(Y[0])
-	percentage.input['eat'] = get_total_interval(Y[1])
+	# percentage.input['sleep'] = get_total_sum(Y[0])
+	# percentage.input['eat'] = get_total_interval(Y[1])
+	percentage.input['sleep'] = 500                # test
+	percentage.input['eat'] = 100
+	percentage.input['exercise'] = 1440
 	print "inerval calculated"
-	percentage.input['exercise'] = get_total_sum(Y[2])
+	# percentage.input['exercise'] = get_total_sum(Y[2])
 	percentage.compute()
 	print "ans computed"
 	z = percentage.output['health']
-	
+	print z
 	return z
 
 def calculate_work(Y):
 
-	tech = ctrl.Antecedent(np.arange(0, 1440, 1), 'tech')
+	tech    = ctrl.Antecedent(np.arange(0, 1440, 1), 'tech')
 	leisure = ctrl.Antecedent(np.arange(0, 1440, 1), 'leisure')
-	work = ctrl.Consequent(np.arange(0, 100, 1), 'work')
+	work 	= ctrl.Consequent(np.arange(0,  100, 1), 'work')
 
-	tech['low'] = fuzz.trapmf(tech.universe, [0, 0, 460, 720])                           #change the vlaues
-	tech['medium'] = fuzz.trapmf(tech.universe, [310,570,870,1130])
-	tech['high'] = fuzz.trapmf(tech.universe, [720,980,1440,1440])
-	leisure['low'] = fuzz.trapmf(leisure.universe, [0,0,30,45])                          #change the values
-	leisure['medium'] = fuzz.trapmf(leisure.universe, [30,45,75,90])
-	leisure['high'] = fuzz.trapmf(leisure.universe, [80,100,1440,1440])	
-	work['low'] = fuzz.trapmf(work.universe, [0,0,30,50])
-	work['medium'] = fuzz.trapmf(work.universe, [5,35,65,90])
-	work['high'] = fuzz.trapmf(work.universe, [50,70,100, 100])
+	tech['L']    = fuzz.trapmf(   tech.universe, [  0,  0, 460, 720])                           #change the vlaues
+	tech['M']    = fuzz.trapmf(   tech.universe, [310,570, 870,1130])
+	tech['H']    = fuzz.trapmf(   tech.universe, [720,980,1440,1440])
+	leisure['L'] = fuzz.trapmf(leisure.universe, [  0,  0,  30,  45])                          #change the values
+	leisure['M'] = fuzz.trapmf(leisure.universe, [ 30, 45,  75,  90])
+	leisure['H'] = fuzz.trapmf(leisure.universe, [ 80,100,1440,1440])	
+	work['L']    = fuzz.trapmf(   work.universe, [  0,  0,  30,  50])
+	work['M']    = fuzz.trapmf(   work.universe, [  5, 35,  65,  90])
+	work['H']    = fuzz.trapmf(   work.universe, [ 50, 70, 100, 100])
 
-	rule1 = ctrl.Rule(tech['high'] & leisure['high'] , work['high'])
-	rule2 = ctrl.Rule(tech['high'] & leisure['medium'] , work['high'])
-	rule3 = ctrl.Rule(tech['medium'] & leisure['high'] , work['high'])
+	rule = []
 
-	rule4 = ctrl.Rule(tech['medium'] & leisure['medium'] , work['medium'])
-	rule5 = ctrl.Rule(tech['medium'] & leisure['low'], work['medium'])
-	rule6 = ctrl.Rule(tech['high'] & leisure['low'], work['medium'])
-	rule7 = ctrl.Rule(tech['low'] & leisure['high'], work['medium'])
+	rule = np.append(rule,ctrl.Rule(tech['L'] & leisure['L'], work['L']))
+	rule = np.append(rule,ctrl.Rule(tech['M'] & leisure['L'], work['M']))
+	rule = np.append(rule,ctrl.Rule(tech['H'] & leisure['L'], work['M']))
+	rule = np.append(rule,ctrl.Rule(tech['L'] & leisure['M'], work['M']))
+	rule = np.append(rule,ctrl.Rule(tech['M'] & leisure['M'], work['H']))
+	rule = np.append(rule,ctrl.Rule(tech['H'] & leisure['M'], work['H']))
+	rule = np.append(rule,ctrl.Rule(tech['L'] & leisure['H'], work['M']))
+	rule = np.append(rule,ctrl.Rule(tech['M'] & leisure['H'], work['H']))
+	rule = np.append(rule,ctrl.Rule(tech['H'] & leisure['H'], work['H']))
 
-	rule8 = ctrl.Rule(tech['low'] & leisure['low'], work['low'])
-
-	work_calc = ctrl.ControlSystem([rule1, rule2, rule3, rule4, rule5, rule6, rule7, rule8])
+	work_calc = ctrl.ControlSystem(rule)
 
 	percentage = ctrl.ControlSystemSimulation(work_calc)
 	
@@ -128,37 +131,38 @@ def calculate_work(Y):
 	percentage.input['leisure'] = get_total_sum(Y[1])
 	percentage.compute()
 	z = percentage.output['work']
-	
+	print z
 	return z
 
 def calculate_social(Y):
 
 	interaction = ctrl.Antecedent(np.arange(0, 1440, 1), 'interaction')
-	online = ctrl.Antecedent(np.arange(0, 1440, 1), 'online')
-	social = ctrl.Consequent(np.arange(0, 100, 1), 'work')
+	online      = ctrl.Antecedent(np.arange(0, 1440, 1),      'online')
+	social      = ctrl.Consequent(np.arange(0,  100, 1),        'work')
 
-	interaction['low'] = fuzz.trapmf(interaction.universe, [0, 0, 460, 720])             #change the vlaues
-	interaction['medium'] = fuzz.trapmf(interaction.universe, [310,570,870,1130])
-	interaction['high'] = fuzz.trapmf(interaction,universe, [720,980,1440,1440])
-	online['low'] = fuzz.trapmf(online.universe, [0,0,30,45])                          #change the values
-	online['medium'] = fuzz.trapmf(online.universe, [30,45,75,90])
-	online['high'] = fuzz.trapmf(online.universe, [80,100,1440,1440])	
-	social['low'] = fuzz.trapmf(social.universe, [0,0,30,50])
-	social['medium'] = fuzz.trapmf(social.universe, [5,35,65,90])
-	social['high'] = fuzz.trapmf(social.unsiverse, [50,70,100, 100])
+	interaction['L'] = fuzz.trapmf(interaction.universe, [  0,  0, 460, 720])             #change the vlaues
+	interaction['M'] = fuzz.trapmf(interaction.universe, [310,570, 870,1130])
+	interaction['H'] = fuzz.trapmf(interaction,universe, [720,980,1440,1440])
+	online['L']      = fuzz.trapmf(		online.universe, [  0,  0,  30,  45])                          #change the values
+	online['M']      = fuzz.trapmf(		online.universe, [ 30, 45,  75,  90])
+	online['H']      = fuzz.trapmf(		online.universe, [ 80,100,1440,1440])	
+	social['L']      = fuzz.trapmf(		social.universe, [  0,  0,  30,  50])
+	social['M'] 	 = fuzz.trapmf(		social.universe, [  5, 35,  65,  90])
+	social['H'] 	 = fuzz.trapmf(		social.universe, [ 50, 70, 100, 100])
 
-	rule1 = ctrl.Rule(interaction['high'] & online['high'] , social['high'])
-	rule2 = ctrl.Rule(interaction['high'] & online['medium'] , social['high'])
-	rule3 = ctrl.Rule(interaction['medium'] & online['high'] , social['high'])
+	rule = []
 
-	rule4 = ctrl.Rule(interaction['medium'] & online['medium'] , social['medium'])
-	rule5 = ctrl.Rule(interaction['medium'] & online['low'], social['medium'])
-	rule6 = ctrl.Rule(interaction['high'] & online['low'], social['medium'])
-	rule7 = ctrl.Rule(interaction['low'] & online['high'], social['medium'])
+	rule = np.append(rule,ctrl.Rule(interaction['L'] & online['L'], social['L']))
+	rule = np.append(rule,ctrl.Rule(interaction['M'] & online['L'], social['M']))
+	rule = np.append(rule,ctrl.Rule(interaction['H'] & online['L'], social['M']))
+	rule = np.append(rule,ctrl.Rule(interaction['L'] & online['M'], social['M']))
+	rule = np.append(rule,ctrl.Rule(interaction['M'] & online['M'], social['M']))
+	rule = np.append(rule,ctrl.Rule(interaction['H'] & online['M'], social['H']))
+	rule = np.append(rule,ctrl.Rule(interaction['L'] & online['H'], social['M']))
+	rule = np.append(rule,ctrl.Rule(interaction['M'] & online['H'], social['H']))
+	rule = np.append(rule,ctrl.Rule(interaction['H'] & online['H'], social['H']))
 
-	rule8 = ctrl.Rule(interaction['low'] & online['low'], social['low'])
-
-	social_calc = ctrl.ControlSystem([rule1, rule2, rule3, rule4, rule5, rule6, rule7, rule8])
+	social_calc = ctrl.ControlSystem(rule)
 
 	percentage = ctrl.ControlSystemSimulation(social_calc)
 	
@@ -179,17 +183,6 @@ def cummumlative_data(Y):
 				break
 
 	return data		
-"""
-def get_data(Y, label_names):
-
-	#h_e = ['label:FIX_running', 'label:FIX_walking', 'label:BICYCLING', 'label:AT_THE_GYM', 
-	#		'label:OR_exercise']
-	#h_s = ['label:LYING_DOWN', 'label:SLEEPING']
-	#h_f = ['label:FIX_restaurant', 'label:EATING']
-
-"""
-
-
 
 def main():
 	bfile = np.array(read_csv('id.csv',sep='\n',header=None)).flatten()
@@ -198,8 +191,7 @@ def main():
 		uuid = bfile[i]
 		print uuid
 		(X,Y,M,timestamps,feature_names,label_names) = read_user_data(uuid)
-		ans = calculate_health([Y[:, 1], Y[:, 2], Y[:, 3]])
-
+		ans = calculate_health([Y[:, 5], Y[:, 36], Y[:, 30]])
 
 if __name__ == '__main__':
 	main()
