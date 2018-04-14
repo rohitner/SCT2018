@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../css/Current.css';
-import axios from 'axios';
+// import axios from 'axios';
 
 class Current extends Component {
     constructor(props) {
@@ -10,22 +10,22 @@ class Current extends Component {
             errorflag: false,
         }
 
-        this.fetchHealth = this.fetchHealth.bind(this);
+        // this.fetchHealth = this.fetchHealth.bind(this);
     }
-    componentDidMount() {
-        this.fetchHealth();
-    }
+    // componentDidMount() {
+    //     this.fetchHealth();
+    // }
     
-    fetchHealth() {
-        axios.get('http://0.0.0.0:5000/health')
-          .then((response) => {
-          console.log(response.data.health);
-          this.setState({ status: response.data.health, errorflag: false });
-        }).catch((error) => {
-          console.log(error);
-          this.setState({ errorflag: true, status: 'Error Occurred' });
-        });
-      }
+    // fetchHealth() {
+    //     axios.get('http://0.0.0.0:5000/health')
+    //       .then((response) => {
+    //       console.log(response.data.health);
+    //       this.setState({ status: response.data.health, errorflag: false });
+    //     }).catch((error) => {
+    //       console.log(error);
+    //       this.setState({ errorflag: true, status: 'Error Occurred' });
+    //     });
+    //   }
 
     render() {
         return (
@@ -40,9 +40,9 @@ class Current extends Component {
                     </div>
                 } 
             </div> <br/>
-            <div style={{display: 'flex'}} >
+            {/* <div style={{display: 'flex'}} >
                 <button style={{margin: 'auto'}} onClick={() => this.fetchHealth()}> Refresh </button>
-            </div>
+            </div> */}
             </div>
         )
     }
