@@ -14,7 +14,7 @@ class App extends Component {
 
     this.state = {
       status: "Welcome! Please login to see your stats! :D",
-      curract: {mental: 'null', social: 'null'},
+      curract: {work: 'null', social: 'null', phealth: 'null', total: 'null' },
       loggedIn: false,
       userId: 'null',
       ytubeIds: ['JQbjS0_ZfJ0','xpVfcZ0ZcFM'],

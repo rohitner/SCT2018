@@ -21,11 +21,6 @@ class RedditItem extends Component {
             <div className="example-2 card">
             <div className="wrapper">
               <div className="header">
-                <div className="date">
-                  <span className="day">{date.getDate()}/</span>
-                  <span className="month">{date.getMonth() + 1}/</span>
-                  <span className="year">{date.getFullYear()}</span>
-                </div>
               </div>
               <div className="data">
                 <div className="content">

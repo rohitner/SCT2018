@@ -8,22 +8,27 @@ import json
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/')
+@app.route('/api/hello')
 def hello():
 	return "Hello"
 
-@app.route('/api/health')
+@app.route('/api/health', methods=['POST'])
 def health():
 	try:
+		data = json.loads(request.data.decode('utf-8'))
 		userID = data['user']
 		fbid = mappings[userID]
-		with open('data_{}.pkl'.format(fbid), 'rb') as f:
-			stored_data = pk.load(f)
+		# with open('data_{}.pkl'.format(fbid), 'rb') as f:
+		# 	stored_data = pk.load(f)
+		stats = list(runmain())
+		for i in range(len(stats)):
+			stats[i] = float(str(stats[i])[:5])
+		stored_data = {'phealth': stats[0],'work': stats[1],'social' : stats[2], 'total': stats[3]}
 	except Exception as e:
-		stored_data = {'loginStatus': 'fail'}
+		stored_data = {'data': 'fail'}
 		print("yahan ke error",e)
-	health = {'social': 'good', 'mental': 'moderate'}
-	return jsonify(health=health)
+	finally:
+		return jsonify(health=stored_data)
 
 
 @app.route('/api/login', methods=['POST'])
@@ -34,8 +39,9 @@ def login():
 		try:
 			userID = data['user']
 			fbid = mappings[userID]
-			with open('data_{}.pkl'.format(fbid), 'rb') as f:
-				stored_data = pk.load(f)
+			# with open('data_{}.pkl'.format(fbid), 'rb') as f:
+			# 	stored_data = pk.load(f)
+			stored_data = {'loginStatus': 'success'}
 		except Exception as e:
 			stored_data = {'loginStatus': 'fail'}
 			print("yahan ke error",e)
