@@ -126,7 +126,7 @@ def calculate_work(Y):
 	tech['M']    = fuzz.trapmf(   tech.universe, [180,300, 480, 540])
 	tech['H']    = fuzz.trapmf(   tech.universe, [480,540, 720, 720])
 	leisure['L'] = fuzz.trapmf(leisure.universe, [  0,  0, 180, 240])                     #change the values
-	leisure['M'] = fuzz.trapmf(leisure.universe, [480,540, 720, 720])
+	leisure['M'] = fuzz.trapmf(leisure.universe, [180,300, 480, 540])
 	leisure['H'] = fuzz.trapmf(leisure.universe, [480,540, 720, 720])	
 	work['L']    = fuzz.trapmf(   work.universe, [  0,  0,  30,  50])
 	work['M']    = fuzz.trapmf(   work.universe, [  5, 35,  65,  90])
@@ -148,12 +148,12 @@ def calculate_work(Y):
 
 	percentage = ctrl.ControlSystemSimulation(work_calc)
 	
-	ans = get_total_interval(Y[0])
+	ans = get_total_sum(Y[0])
 	if ans>720:
 		percentage.input['tech'] = 720
 	else:
 		percentage.input['tech'] = ans
-	ans = get_total_interval(Y[1])
+	ans = get_total_sum(Y[1])
 	if ans>720:
 		percentage.input['leisure'] = 720
 	else:
@@ -170,12 +170,12 @@ def calculate_social(Y):
 	online      = ctrl.Antecedent(np.arange(0, 1440, 1),      'online')
 	social      = ctrl.Consequent(np.arange(0,  100, 1),      'social')
 
-	interaction['L'] = fuzz.trapmf(interaction.universe, [  0,  0, 460, 720])             #change the vlaues
-	interaction['M'] = fuzz.trapmf(interaction.universe, [310,570, 870,1130])
-	interaction['H'] = fuzz.trapmf(interaction.universe, [720,980,1440,1440])
-	online['L']      = fuzz.trapmf(		online.universe, [  0,  0,  30,  45])             #change the values
-	online['M']      = fuzz.trapmf(		online.universe, [ 30, 45,  75,  90])
-	online['H']      = fuzz.trapmf(		online.universe, [ 80,100,1440,1440])	
+	interaction['L'] = fuzz.trapmf(interaction.universe, [  0,  0, 180, 240])             #change the vlaues
+	interaction['M'] = fuzz.trapmf(interaction.universe, [180,300, 480, 540])
+	interaction['H'] = fuzz.trapmf(interaction.universe, [480,540, 720, 720])
+	online['L']      = fuzz.trapmf(		online.universe, [  0,  0, 180, 240])             #change the values
+	online['M']      = fuzz.trapmf(		online.universe, [180,300, 480, 540])
+	online['H']      = fuzz.trapmf(		online.universe, [480,540, 720, 720])	
 	social['L']      = fuzz.trapmf(		social.universe, [  0,  0,  30,  50])
 	social['M'] 	 = fuzz.trapmf(		social.universe, [  5, 35,  65,  90])
 	social['H'] 	 = fuzz.trapmf(		social.universe, [ 60, 70, 100, 100])
@@ -196,12 +196,12 @@ def calculate_social(Y):
 
 	percentage = ctrl.ControlSystemSimulation(social_calc)
 	
-	ans = get_total_interval(Y[0])
+	ans = get_total_sum(Y[0])
 	if ans>720:
 		percentage.input['interaction'] = 720
 	else:
 		percentage.input['interaction'] = ans
-	ans = get_total_interval(Y[1])
+	ans = get_total_sum(Y[1])
 	if ans>720:
 		percentage.input['online'] = 720
 	else:
@@ -219,18 +219,18 @@ def calculate_total(Y):
 	social = ctrl.Antecedent(np.arange(0, 100, 1), 'social')
 	total  = ctrl.Consequent(np.arange(0, 100, 1),  'total')
 
-	health['L'] = fuzz.trapmf(health.universe, [  0,  0,  30,  50])
-	health['M'] = fuzz.trapmf(health.universe, [  5, 35,  65,  90])
-	health['H'] = fuzz.trapmf(health.universe, [ 60, 70, 100, 100])
-	work['L']   = fuzz.trapmf(  work.universe, [  0,  0,  30,  50])
-	work['M'] 	= fuzz.trapmf(  work.universe, [  5, 35,  65,  90])
-	work['H'] 	= fuzz.trapmf(  work.universe, [ 60, 70, 100, 100])
-	social['L'] = fuzz.trapmf(social.universe, [  0,  0,  30,  50])
-	social['M'] = fuzz.trapmf(social.universe, [  5, 35,  65,  90])
-	social['H'] = fuzz.trapmf(social.universe, [ 60, 70, 100, 100])
-	total['L']  = fuzz.trapmf( total.universe, [  0,  0,  30,  50])
-	total['M']  = fuzz.trapmf( total.universe, [  5, 35,  65,  90])
-	total['H']  = fuzz.trapmf( total.universe, [ 60, 70, 100, 100])
+	health['L'] = fuzz.trapmf(health.universe, [  0,  0,  20,  30])
+	health['M'] = fuzz.trapmf(health.universe, [ 20, 30,  70,  80])
+	health['H'] = fuzz.trapmf(health.universe, [ 70, 80, 100, 100])
+	work['L']   = fuzz.trapmf(  work.universe, [  0,  0,  20,  30])
+	work['M'] 	= fuzz.trapmf(  work.universe, [ 20, 30,  70,  80])
+	work['H'] 	= fuzz.trapmf(  work.universe, [ 70, 80, 100, 100])
+	social['L'] = fuzz.trapmf(social.universe, [  0,  0,  20,  50])
+	social['M'] = fuzz.trapmf(social.universe, [ 20, 30,  70,  80])
+	social['H'] = fuzz.trapmf(social.universe, [ 70, 80, 100, 100])
+	total['L']  = fuzz.trapmf( total.universe, [  0,  0,  20,  50])
+	total['M']  = fuzz.trapmf( total.universe, [ 20, 30,  70,  80])
+	total['H']  = fuzz.trapmf( total.universe, [ 70, 80, 100, 100])
 
 	rule = []
 
@@ -266,9 +266,9 @@ def calculate_total(Y):
 
 	percentage = ctrl.ControlSystemSimulation(total_calc)
 	
-	percentage.input['health'] = get_total_sum(Y[0])
-	percentage.input['work'] = get_total_sum(Y[1])
-	percentage.input['social'] = get_total_sum(Y[2])
+	percentage.input['health'] = Y[0]
+	percentage.input['work']   = Y[1]
+	percentage.input['social'] = Y[2]
 	percentage.compute()
 	z = percentage.output['total']
 	
@@ -349,12 +349,12 @@ def all_data(Y, label_names):
 def runmain():
 	bfile = np.array(read_csv('id.csv',sep='\n',header=None)).flatten()
 
-	for i in range(1, 2):
+	for i in range(0, 60):
 		uuid = bfile[i]
 		# print uuid
 		(X,Y,M,timestamps,feature_names,label_names) = read_user_data(uuid)
 		dat = all_data(Y[0:1440, :], label_names)
-		return calculate([[dat[:,0],
+		print calculate([[dat[:,0],
 						  dat[:,1],
 						  dat[:,2]],
 						 [dat[:,3],
