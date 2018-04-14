@@ -349,12 +349,12 @@ def all_data(Y, label_names):
 def runmain():
 	bfile = np.array(read_csv('id.csv',sep='\n',header=None)).flatten()
 
-	for i in range(0, 60):
+	for i in range(1, 2):
 		uuid = bfile[i]
 		# print uuid
 		(X,Y,M,timestamps,feature_names,label_names) = read_user_data(uuid)
 		dat = all_data(Y[0:1440, :], label_names)
-		print calculate([[dat[:,0],
+		return calculate([[dat[:,0],
 						  dat[:,1],
 						  dat[:,2]],
 						 [dat[:,3],
