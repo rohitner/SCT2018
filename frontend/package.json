@@ -9,6 +9,7 @@
     "react": "^16.3.0",
     "react-alice-carousel": "^1.9.2",
     "react-dom": "^16.3.0",
+    "react-facebook-login": "^4.0.1",
     "react-scripts": "1.1.1",
     "react-slick": "^0.23.1",
     "react-youtube": "^7.5.0",
