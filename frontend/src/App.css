@@ -105,6 +105,8 @@ body {
 @media only screen and (max-width: 400px) {
   .Content{
     flex-direction: column;
+    align-items: unset;
+    justify-content: space-between;
   }
   .Login {
     order: -1

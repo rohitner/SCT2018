@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
-// import axios from 'axios';
 import YouTube from 'react-youtube';
 
 class YoutubeSuggest extends Component {
@@ -35,7 +34,7 @@ class YoutubeSuggest extends Component {
             // onReady={this._onReady}
             />
             </Slide> }) }
-            
+
             </Slider>
             <div className='buttons'>
             <ButtonBack className='prev' >Previous</ButtonBack>
