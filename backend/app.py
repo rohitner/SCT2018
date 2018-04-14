@@ -1,5 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from sct import runmain
+
 import pickle as pk
 import json
 
