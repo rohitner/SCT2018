@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import YouTube from 'react-youtube';
+import '../css/react-carousel.es.css';
 
 class YoutubeSuggest extends Component {
     constructor(props) {

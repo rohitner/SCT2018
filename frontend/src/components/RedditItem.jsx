@@ -15,7 +15,7 @@ class RedditItem extends Component {
     // }
 
     render() {
-        var date = new Date(1000 * this.state.data.created);
+        // var date = new Date(1000 * this.state.data.created);
         return (
             <div className='cardcon' > 
             <div className="example-2 card">

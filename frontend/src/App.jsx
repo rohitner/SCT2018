@@ -49,12 +49,12 @@ class App extends Component {
   }
 
   handleLogin(flag, username) {
-    var toset = this.state;
-    return axios.post('http://0.0.0.0:5000/api/login',{ 
+    // var toset = this.state;
+    return axios.post('http://4a436885.ngrok.io/api/login',{ 
       user: username
     })
     .then((response) => {
-      if(response.data.loginStatus == 'fail'){
+      if(response.data.loginStatus === 'fail'){
         var temp = this.state.status;
         this.setState({status: 'Wrong Login'})
         setTimeout(() =>{
@@ -63,7 +63,7 @@ class App extends Component {
         
       }
       else{
-        var temp = {mental: response.data.mental, social: response.data.social}
+        temp = {mental: response.data.mental, social: response.data.social}
         this.setState({ loggedIn: true, userId: username, status: 'Welcome '+username, curract: temp});
         // console.log(toset);
         // console.log('login ka ',response);

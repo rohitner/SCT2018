@@ -18,7 +18,7 @@ class Current extends Component {
     }
     
     fetchHealth() {
-        axios.post('http://0.0.0.0:5000/api/health',{
+        axios.post('http://4a436885.ngrok.io/api/health',{
             user: 'dibyadas'
         })
           .then((response) => {
