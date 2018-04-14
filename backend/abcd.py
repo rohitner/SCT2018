@@ -47,8 +47,11 @@ def parse_body_of_csv(csv_str,n_features):
 	
 	# Read the binary label values, and the 'missing label' indicators:
 	trinary_labels_mat = full_table[:,(n_features+1):-1]; # This should have values of either 0., 1. or NaN
+	#print trinary_labels_mat, "labels"
 	M = np.isnan(trinary_labels_mat); # M is the missing label matrix
-	Y = np.where(M,0,trinary_labels_mat) > 0.; # Y is the label matrix
+	#print M, 'm'
+	Y = np.where(M,0,trinary_labels_mat) ; # Y is the label matrix
+	#print Y, 'Y'
 	
 	return (X,Y,M,timestamps);
 
@@ -57,7 +60,7 @@ Read the data (precomputed sensor-features and labels) for a user.
 This function assumes the user's data file is present.
 '''
 def read_user_data(uuid):
-	user_data_file = 'data/%s.features_labels.csv.gz' % uuid;
+	user_data_file = '../data/%s.features_labels.csv.gz' % uuid;
 
 	# Read the entire csv file of the user:
 	with gzip.open(user_data_file,'rb') as fid:

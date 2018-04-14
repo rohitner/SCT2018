@@ -1,13 +1,22 @@
 from abcd import *
 import skfuzzy as fuzz
-from skfuzzy import control as ctrl 
+from skfuzzy import control as ctrl
+import pandas as pd 
+import statsmodels.api as sm 
 
 def get_total_interval(data):
-
+	print data.shape
 	total_interval = 0
 	i = 0
 	cnt = 0
+	maxx = np.max(data)
+	M = data<0.3*maxx
+	data2 = np.where(M, 0, data)
+	M = data2>0
+	data = np.where(M, 1, data2)
 
+	#plt.plot(data)
+	#plt.show()
 	while i < len(data):
 		if data[i] == 1:
 			total_interval += 1
@@ -19,27 +28,34 @@ def get_total_interval(data):
 			i += cnt
 		i += 1	
 
-		
+	print "total interval " + str(total_interval)	
 	return total_interval
 	
 def get_total_sum(data):
 
+	maxx = np.max(data)
+	#print "max" + str(maxx)
+	M = data<0.3*maxx
+	data2 = np.where(M, 0, data)
+	M = data2>0
+	data = np.where(M, 1, data2)
 	total_hours = np.sum(data)
+	print "total hours " + str(total_hours/60)
 	return total_hours
 
 def calculate_health(Y):
 
 	sleep    = ctrl.Antecedent(np.arange(0, 1440, 1),    'sleep')
-	eat 	 = ctrl.Antecedent(np.arange(0,  100, 1),      'eat')
+	eat 	 = ctrl.Antecedent(np.arange(0,  10, 1),      'eat')
 	exercise = ctrl.Antecedent(np.arange(0, 1440, 1), 'exercise')
 	health   = ctrl.Consequent(np.arange(0,  100, 1),   'health')
 
 	sleep['L']    = fuzz.trapmf(   sleep.universe, [  0,  0, 460, 720])
 	sleep['M']    = fuzz.trapmf(   sleep.universe, [310,570, 870,1130])
 	sleep['H']    = fuzz.trapmf(   sleep.universe, [720,980,1440,1440])
-	eat['L']      = fuzz.trapmf(  	 eat.universe, [  0,  1,   1,   2])
+	eat['L']      = fuzz.trapmf(  	 eat.universe, [  0,  0,   1,   2])
 	eat['M']      = fuzz.trapmf(     eat.universe, [  1,  2,   4,   5])
-	eat['H']      = fuzz.trapmf(     eat.universe, [  4,  6, 100, 100])	
+	eat['H']      = fuzz.trapmf(     eat.universe, [  4,  6, 10, 10])	
 	exercise['L'] = fuzz.trapmf(exercise.universe, [  0,  0,  30,  45])
 	exercise['M'] = fuzz.trapmf(exercise.universe, [ 30, 45,  75,  90])
 	exercise['H'] = fuzz.trapmf(exercise.universe, [ 80,100,1440,1440])
@@ -82,7 +98,11 @@ def calculate_health(Y):
 	percentage = ctrl.ControlSystemSimulation(health_calc)
 
 	percentage.input['sleep'] = get_total_sum(Y[0])
-	percentage.input['eat'] = get_total_interval(Y[1])
+	ans = get_total_interval(Y[1])
+	if ans>10:
+		percentage.input['eat'] = 9
+	else:
+		percentage.input['eat'] = ans	
 	percentage.input['exercise'] = get_total_sum(Y[2])
 	percentage.compute()
 	z = percentage.output['health']
@@ -95,10 +115,10 @@ def calculate_work(Y):
 	leisure = ctrl.Antecedent(np.arange(0, 1440, 1), 'leisure')
 	work 	= ctrl.Consequent(np.arange(0,  100, 1),    'work')
 
-	tech['L']    = fuzz.trapmf(   tech.universe, [  0,  0, 460, 720])                           #change the vlaues
+	tech['L']    = fuzz.trapmf(   tech.universe, [  0,  0, 460, 720])                   #change the vlaues
 	tech['M']    = fuzz.trapmf(   tech.universe, [310,570, 870,1130])
 	tech['H']    = fuzz.trapmf(   tech.universe, [720,980,1440,1440])
-	leisure['L'] = fuzz.trapmf(leisure.universe, [  0,  0,  30,  45])                          #change the values
+	leisure['L'] = fuzz.trapmf(leisure.universe, [  0,  0,  30,  45])                     #change the values
 	leisure['M'] = fuzz.trapmf(leisure.universe, [ 30, 45,  75,  90])
 	leisure['H'] = fuzz.trapmf(leisure.universe, [ 80,100,1440,1440])	
 	work['L']    = fuzz.trapmf(   work.universe, [  0,  0,  30,  50])
@@ -137,7 +157,7 @@ def calculate_social(Y):
 	interaction['L'] = fuzz.trapmf(interaction.universe, [  0,  0, 460, 720])             #change the vlaues
 	interaction['M'] = fuzz.trapmf(interaction.universe, [310,570, 870,1130])
 	interaction['H'] = fuzz.trapmf(interaction.universe, [720,980,1440,1440])
-	online['L']      = fuzz.trapmf(		online.universe, [  0,  0,  30,  45])                          #change the values
+	online['L']      = fuzz.trapmf(		online.universe, [  0,  0,  30,  45])             #change the values
 	online['M']      = fuzz.trapmf(		online.universe, [ 30, 45,  75,  90])
 	online['H']      = fuzz.trapmf(		online.universe, [ 80,100,1440,1440])	
 	social['L']      = fuzz.trapmf(		social.universe, [  0,  0,  30,  50])
@@ -278,28 +298,43 @@ def all_data(Y, label_names):
 			ans.append(temp)
 
 	ans = np.array(ans)	
-	print type(ans)
-	#dft = pd.DataFrame(ans[2],columns = ['A'],index=pd.date_range('20130101',periods=1440,freq='T'))
-	#res = sm.tsa.seasonal_decompose(dft.A, freq=60)
+	final_ans = []
+	for i in range(len(ans)):
+	 	dft = pd.DataFrame(ans[i],columns = ['A'],index=pd.date_range('20170101',periods=1440,freq='T'))
+	 	res = sm.tsa.seasonal_decompose(dft.A, freq=60)
+	 	a = res.trend
+	 	tem = np.isnan(a)
+	 	a[tem] = 0
+	 	#print a
+	 	final_ans.append(a)
+		
 	#res.plot()
 	#plt.show()	
-	return ans.transpose()		
+	final_ans = np.array(final_ans)
+
+	return final_ans.transpose()
+
 
 def main():
 	bfile = np.array(read_csv('id.csv',sep='\n',header=None)).flatten()
 
-	for i in range(1,2):
+	for i in range(2, 3):
 		uuid = bfile[i]
 		print uuid
 		(X,Y,M,timestamps,feature_names,label_names) = read_user_data(uuid)
+		# na = np.isnan(Y)
+		#print "he;oooooooo"
+		#print Y, 'Y 2'
 		dat = all_data(Y[0:1440, :], label_names)
-		ans = calculate([[Y[:,label_names.index('SLEEPING')],
-						  Y[:,label_names.index('EATING')],
-						  Y[:,label_names.index('FIX_walking')]],
-						 [Y[:,label_names.index('COMPUTER_WORK')],
-						  Y[:,label_names.index('SINGING')]],
-						 [Y[:,label_names.index('WITH_FRIENDS')],
-						  Y[:,label_names.index('SURFING_THE_INTERNET')]]])
+		#print dat
+		#ans = calculate_health([dat[:,0], dat[:,1], dat[:, 2]])
+		ans = calculate([[dat[:,0],
+						  dat[:,1],
+						  dat[:,2]],
+						 [dat[:,3],
+						  dat[:,4]],
+						 [dat[:,5],
+						  dat[:,6]]])
 		print ans
 
 if __name__ == '__main__':
