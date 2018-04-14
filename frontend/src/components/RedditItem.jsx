@@ -10,9 +10,9 @@ class RedditItem extends Component {
         }
     }
 
-    componentDidMount(){
-        console.log(this.state.data);
-    }
+    // componentDidMount(){
+    //     console.log(this.state.data);
+    // }
 
     render() {
         var date = new Date(1000 * this.state.data.created);

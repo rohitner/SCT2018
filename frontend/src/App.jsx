@@ -46,8 +46,7 @@ class App extends Component {
           <div>Smart, Neuro-Fuzzy system based app that takes care of your mental and social health</div>
         </header>
         <div className='Content'>
-        {/* <div className='Lorem'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat maxime, necessitatibus perferendis odio atque voluptatum iste, earum fugiat praesentium vero libero, esse quas? Facilis fugit quod, iure dolorem harum cumque. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi qui doloribus ab nihil quasi. Necessitatibus corrupti tempore dolorum expedita natus alias facere distinctio sit quis hic, obcaecati harum quae voluptate!</div> */}
-        <div className='Youtube'>Here are some video suggestions you may like!<YoutubeSuggest ytubeIds={this.state.ytubeIds} /></div>
+        <div className='Youtube'><p style={{padding: '2%'}}>Here are some video suggestions you may like!</p><YoutubeSuggest ytubeIds={this.state.ytubeIds} /></div>
         <div className='Login'>
         { !this.state.loggedIn ? 
             <Login handleLogin={this.handleLogin} />

@@ -22,9 +22,17 @@ class Reddit extends Component {
     fetchNews() {
         axios.get('https://www.reddit.com/r/UpliftingNews/top/.json?count=10')
           .then((response) => {
-          this.setState({ data: response.data.data.children.splice(0,10),
+            var childs = response.data.data.children.splice(0,10);
+           for(var i=0; i < childs.length; i++){
+            //    console.log(childs[i].data.over_18);
+               if((childs[i].data.over_18)){
+                // console.log('removing ', childs[i]);
+                childs = childs.splice(i,1);     
+               }
+           }
+            this.setState({ data: childs,
                           loaded: true });
-          console.log("reddit ",this.state.data)
+        
         }).catch((error) => {
           console.log(error);
         //   this.setState({ errorflag: true, status: 'Error Occurred' });

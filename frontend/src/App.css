@@ -73,8 +73,12 @@ body {
 
 .logout {
   /* display: inline; */
-  padding: 1%;
+  position: fixed;
+  padding: 2mm;
   text-align: right;
+  top: 2mm;
+  right: 2mm;
+  /* padding: 1%; */
   /* left: 100%; */
   /* transform: translate(-50%); */
 }
@@ -95,6 +99,10 @@ body {
 .Reddit {
   /* max-width: 30%; */
   flex: 3;
+}
+
+.Current {
+  flex: 4;
 }
 
 .Login {
