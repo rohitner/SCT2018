@@ -351,8 +351,9 @@ def runmain():
 
 	for i in range(1, 2):
 		uuid = bfile[i]
-		# print uuid
 		(X,Y,M,timestamps,feature_names,label_names) = read_user_data(uuid)
+		plotpie(uuid)
+		# plt.show()
 		dat = all_data(Y[0:1440, :], label_names)
 		return calculate([[dat[:,0],
 						  dat[:,1],

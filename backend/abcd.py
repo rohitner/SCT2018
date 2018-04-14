@@ -115,3 +115,17 @@ def get_label_pretty_name(label):
 	label = label[0] + label[1:].lower();
 	label = label.replace('i m','I\'m');
 	return label;
+
+def plotpie(uuid):
+
+	(X,Y,M,timestamps,feature_names,label_names) = read_user_data(uuid)
+
+	fig = plt.figure(figsize=(15,5),facecolor='white');
+
+	ax1 = plt.subplot(1,2,1);
+	labels_to_display = ['LYING_DOWN','SITTING','OR_standing','FIX_walking','FIX_running'];
+	figure__pie_chart(Y,label_names,labels_to_display,'Body state',ax1);
+
+	ax2 = plt.subplot(1,2,2);
+	labels_to_display = ['PHONE_IN_HAND','PHONE_IN_BAG','PHONE_IN_POCKET','PHONE_ON_TABLE'];
+	figure__pie_chart(Y,label_names,labels_to_display,'Phone position',ax2);
