@@ -1,5 +1,6 @@
 from abcd import *
 import skfuzzy as fuzz
+from skfuzzy import control as ctrl 
 
 def get_total_interval(data):
 
@@ -15,7 +16,9 @@ def get_total_interval(data):
 				if data[j] == 0:
 					break
 				cnt += 1
-		i += cnt	
+			i += cnt
+		i += 1	
+
 		
 	return total_interval
 	
@@ -27,7 +30,7 @@ def get_total_sum(data):
 def calculate_health(Y):
 
 	sleep = ctrl.Antecedent(np.arange(0, 1440, 1), 'sleep')
-	eat = ctrl.Antecedent(np.arange(0, 1440, 1), 'eat')
+	eat = ctrl.Antecedent(np.arange(0, 100, 1), 'eat')
 	exercise = ctrl.Antecedent(np.arange(0, 1440, 1), 'exercise')
 	health = ctrl.Consequent(np.arange(0, 100, 1), 'health')
 
@@ -77,13 +80,15 @@ def calculate_health(Y):
 	health_calc = ctrl.ControlSystem([rule1, rule2, rule3, rule4, rule5, rule6, rule7, rule8, rule9,
 					rule10, rule11, rule12, rule13, rule14, rule15, rule16, rule17, rule18, rule19,
 					rule20, rule21, rule22, rule23, rule24, rule25, rule26, rule27 ])
-
+	print "rule base done"
 	percentage = ctrl.ControlSystemSimulation(health_calc)
-	
+	print "control system defined"
 	percentage.input['sleep'] = get_total_sum(Y[0])
 	percentage.input['eat'] = get_total_interval(Y[1])
+	print "inerval calculated"
 	percentage.input['exercise'] = get_total_sum(Y[2])
 	percentage.compute()
+	print "ans computed"
 	z = percentage.output['health']
 	
 	return z
@@ -106,7 +111,7 @@ def calculate_work(Y):
 
 	rule1 = ctrl.Rule(tech['high'] & leisure['high'] , work['high'])
 	rule2 = ctrl.Rule(tech['high'] & leisure['medium'] , work['high'])
-	rule3 = ctrl.Rule(tech['medium'] & leisure['high']  work['high'])
+	rule3 = ctrl.Rule(tech['medium'] & leisure['high'] , work['high'])
 
 	rule4 = ctrl.Rule(tech['medium'] & leisure['medium'] , work['medium'])
 	rule5 = ctrl.Rule(tech['medium'] & leisure['low'], work['medium'])
@@ -144,7 +149,7 @@ def calculate_social(Y):
 
 	rule1 = ctrl.Rule(interaction['high'] & online['high'] , social['high'])
 	rule2 = ctrl.Rule(interaction['high'] & online['medium'] , social['high'])
-	rule3 = ctrl.Rule(interaction['medium'] & online['high']  social['high'])
+	rule3 = ctrl.Rule(interaction['medium'] & online['high'] , social['high'])
 
 	rule4 = ctrl.Rule(interaction['medium'] & online['medium'] , social['medium'])
 	rule5 = ctrl.Rule(interaction['medium'] & online['low'], social['medium'])
@@ -164,6 +169,25 @@ def calculate_social(Y):
 	
 	return z	
 
+def cummumlative_data(Y):
+
+	data = np.zeros(len(Y))
+	for i in range(len(Y)):
+		for j in range(len(Y[i])):
+			if Y[i,j] == 1:
+				data[i] = 1
+				break
+
+	return data		
+"""
+def get_data(Y, label_names):
+
+	#h_e = ['label:FIX_running', 'label:FIX_walking', 'label:BICYCLING', 'label:AT_THE_GYM', 
+	#		'label:OR_exercise']
+	#h_s = ['label:LYING_DOWN', 'label:SLEEPING']
+	#h_f = ['label:FIX_restaurant', 'label:EATING']
+
+"""
 
 
 
@@ -174,6 +198,8 @@ def main():
 		uuid = bfile[i]
 		print uuid
 		(X,Y,M,timestamps,feature_names,label_names) = read_user_data(uuid)
+		ans = calculate_health([Y[:, 1], Y[:, 2], Y[:, 3]])
+
 
 if __name__ == '__main__':
 	main()
