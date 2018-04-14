@@ -10,15 +10,10 @@ h1 {
   font-weight: 300;
 }
 
-.row {
-  max-width: 900px;
-  margin: 50px auto 0;
-}
-
 .card {
-  /* float: left; */
-  /* padding-right: 2% 1.7rem; */
-  /* height: 100%; */
+  float: left;
+  padding-right: 2% 1.7rem;
+  height: 40%;
   width: 100%;
 }
 .card .menu-content {
@@ -51,7 +46,7 @@ h1 {
 }
 .card .wrapper {
   background-color: #fff;
-  min-height: 540px;
+  min-height: 450px;
   position: relative;
   overflow: hidden;
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.2);
@@ -85,6 +80,24 @@ h1 {
   height: 70px;
   margin: 0;
 }
+
+.wrapper {
+  border-radius: 30px;
+}
+
+.example-2 .card {
+  max-width: 240px;
+  width: 100px;
+}
+
+.data {
+  width: 50%;
+}
+
+.text {
+  padding: 10%;
+}
+
 .card input[type='checkbox'] {
   display: none;
 }
@@ -94,7 +107,7 @@ h1 {
 }
 
 .example-2 .wrapper {
-  background: linear-gradient(to top, #1a2a6c, #b21f1f, #fdbb2d);
+  background: linear-gradient(to top, #233475, #67308b, #365d91);
 }
 .example-2 .wrapper:hover .menu-content span {
   -webkit-transform: translate(-50%, -10px);

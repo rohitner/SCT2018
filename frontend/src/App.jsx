@@ -3,6 +3,7 @@ import './App.css';
 import Current from './components/Current';
 import Login from './components/Login';
 import Reddit from './components/Reddit';
+import YoutubeSuggest from './components/YoutubeSuggest';
 // import axios from 'axios';
 
 class App extends Component {
@@ -14,6 +15,7 @@ class App extends Component {
       curract: {mental: 'null', social: 'null'},
       loggedIn: false,
       userId: 'null',
+      ytubeIds: ['JQbjS0_ZfJ0','xpVfcZ0ZcFM']
     }
 
     this.handleLogin = this.handleLogin.bind(this);
@@ -44,7 +46,8 @@ class App extends Component {
           <div>Smart, Neuro-Fuzzy system based app that takes care of your mental and social health</div>
         </header>
         <div className='Content'>
-        <div className='Lorem'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat maxime, necessitatibus perferendis odio atque voluptatum iste, earum fugiat praesentium vero libero, esse quas? Facilis fugit quod, iure dolorem harum cumque. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi qui doloribus ab nihil quasi. Necessitatibus corrupti tempore dolorum expedita natus alias facere distinctio sit quis hic, obcaecati harum quae voluptate!</div>
+        {/* <div className='Lorem'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat maxime, necessitatibus perferendis odio atque voluptatum iste, earum fugiat praesentium vero libero, esse quas? Facilis fugit quod, iure dolorem harum cumque. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi qui doloribus ab nihil quasi. Necessitatibus corrupti tempore dolorum expedita natus alias facere distinctio sit quis hic, obcaecati harum quae voluptate!</div> */}
+        <div className='Youtube'><YoutubeSuggest ytubeIds={this.state.ytubeIds} /></div>
         <div className='Login'>
         { !this.state.loggedIn ? 
             <Login handleLogin={this.handleLogin} />

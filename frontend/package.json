@@ -11,6 +11,7 @@
     "react-dom": "^16.3.0",
     "react-scripts": "1.1.1",
     "react-slick": "^0.23.1",
+    "react-youtube": "^7.5.0",
     "styled-jss": "^2.2.2"
   },
   "homepage": "http://dibyadas.github.io/sochack-site",

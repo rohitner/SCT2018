@@ -84,12 +84,13 @@ body {
   flex-direction: row;
   justify-content: space-between;
   align-content: center;
+  align-items: flex-start;
   padding-left: 5%;
   padding-right: 5%;
   /* flex-wrap: wrap; */
 }
-.Lorem {
-  flex: 2;
+.Youtube {
+  flex: 3;
 }
 .Reddit {
   /* max-width: 30%; */
@@ -99,3 +100,15 @@ body {
 .Login {
   flex: 4;
 }
+
+
+@media only screen and (max-width: 400px) {
+  .Content{
+    flex-direction: column;
+  }
+  .Login {
+    order: -1
+  }
+  
+}
+
