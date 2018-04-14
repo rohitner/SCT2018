@@ -220,17 +220,17 @@ def calculate_total(Y):
 	total  = ctrl.Consequent(np.arange(0, 100, 1),  'total')
 
 	health['L'] = fuzz.trapmf(health.universe, [  0,  0,  20,  30])
-	health['M'] = fuzz.trapmf(health.universe, [ 20, 30,  60,  70])
-	health['H'] = fuzz.trapmf(health.universe, [ 60, 70, 100, 100])
+	health['M'] = fuzz.trapmf(health.universe, [ 20, 30,  70,  80])
+	health['H'] = fuzz.trapmf(health.universe, [ 70, 80, 100, 100])
 	work['L']   = fuzz.trapmf(  work.universe, [  0,  0,  20,  30])
-	work['M'] 	= fuzz.trapmf(  work.universe, [ 20, 30,  60,  70])
-	work['H'] 	= fuzz.trapmf(  work.universe, [ 60, 70, 100, 100])
+	work['M'] 	= fuzz.trapmf(  work.universe, [ 20, 30,  70,  80])
+	work['H'] 	= fuzz.trapmf(  work.universe, [ 70, 80, 100, 100])
 	social['L'] = fuzz.trapmf(social.universe, [  0,  0,  20,  50])
-	social['M'] = fuzz.trapmf(social.universe, [ 20, 30,  60,  70])
-	social['H'] = fuzz.trapmf(social.universe, [ 60, 70, 100, 100])
+	social['M'] = fuzz.trapmf(social.universe, [ 20, 30,  70,  80])
+	social['H'] = fuzz.trapmf(social.universe, [ 70, 80, 100, 100])
 	total['L']  = fuzz.trapmf( total.universe, [  0,  0,  20,  50])
-	total['M']  = fuzz.trapmf( total.universe, [ 20, 30,  60,  70])
-	total['H']  = fuzz.trapmf( total.universe, [ 60, 70, 100, 100])
+	total['M']  = fuzz.trapmf( total.universe, [ 20, 30,  70,  80])
+	total['H']  = fuzz.trapmf( total.universe, [ 70, 80, 100, 100])
 
 	rule = []
 
