@@ -4,3 +4,4 @@ sochack/
 node_modules/
 dist/
 .vscode/
+backend/data
