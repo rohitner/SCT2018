@@ -44,62 +44,58 @@ def calculate_health(Y):
 	exercise['M'] = fuzz.trapmf(exercise.universe, [ 30, 45,  75,  90])
 	exercise['H'] = fuzz.trapmf(exercise.universe, [ 80,100,1440,1440])
 	health['L']   = fuzz.trapmf(  health.universe, [  0,  0,  30,  50])
-	health['M']   = fuzz.trapmf(  health.universe, [ 30, 40,  60,  70])
-	health['H']   = fuzz.trapmf(  health.universe, [ 60, 80, 100, 100])
+	health['M']   = fuzz.trapmf(  health.universe, [  5, 35,  65,  90])
+	health['H']   = fuzz.trapmf(  health.universe, [ 60, 70, 100, 100])
 
 	rule = []
 
-	rule = np.append(rule,ctrl.Rule(exercise['L'] & sleep['L'] & eat['L'], health['L']))
-	rule = np.append(rule,ctrl.Rule(exercise['M'] & sleep['L'] & eat['L'], health['L']))
-	rule = np.append(rule,ctrl.Rule(exercise['H'] & sleep['L'] & eat['L'], health['L']))
-	rule = np.append(rule,ctrl.Rule(exercise['L'] & sleep['M'] & eat['L'], health['L']))
-	rule = np.append(rule,ctrl.Rule(exercise['M'] & sleep['M'] & eat['L'], health['M']))
-	rule = np.append(rule,ctrl.Rule(exercise['H'] & sleep['M'] & eat['L'], health['M']))
-	rule = np.append(rule,ctrl.Rule(exercise['L'] & sleep['H'] & eat['L'], health['L']))
-	rule = np.append(rule,ctrl.Rule(exercise['M'] & sleep['H'] & eat['L'], health['M']))
-	rule = np.append(rule,ctrl.Rule(exercise['H'] & sleep['H'] & eat['L'], health['M']))
-	rule = np.append(rule,ctrl.Rule(exercise['L'] & sleep['L'] & eat['M'], health['L']))
-	rule = np.append(rule,ctrl.Rule(exercise['M'] & sleep['L'] & eat['M'], health['M']))
-	rule = np.append(rule,ctrl.Rule(exercise['H'] & sleep['L'] & eat['M'], health['M']))
-	rule = np.append(rule,ctrl.Rule(exercise['L'] & sleep['M'] & eat['M'], health['M']))
-	rule = np.append(rule,ctrl.Rule(exercise['M'] & sleep['M'] & eat['M'], health['H']))
-	rule = np.append(rule,ctrl.Rule(exercise['H'] & sleep['M'] & eat['M'], health['H']))
-	rule = np.append(rule,ctrl.Rule(exercise['L'] & sleep['H'] & eat['M'], health['M']))
-	rule = np.append(rule,ctrl.Rule(exercise['M'] & sleep['H'] & eat['M'], health['H']))
-	rule = np.append(rule,ctrl.Rule(exercise['H'] & sleep['H'] & eat['M'], health['H']))
-	rule = np.append(rule,ctrl.Rule(exercise['L'] & sleep['L'] & eat['H'], health['L']))
-	rule = np.append(rule,ctrl.Rule(exercise['M'] & sleep['L'] & eat['H'], health['M']))
-	rule = np.append(rule,ctrl.Rule(exercise['H'] & sleep['L'] & eat['H'], health['M']))
-	rule = np.append(rule,ctrl.Rule(exercise['L'] & sleep['M'] & eat['H'], health['M']))
-	rule = np.append(rule,ctrl.Rule(exercise['M'] & sleep['M'] & eat['H'], health['H']))
-	rule = np.append(rule,ctrl.Rule(exercise['H'] & sleep['M'] & eat['H'], health['H']))
-	rule = np.append(rule,ctrl.Rule(exercise['L'] & sleep['H'] & eat['H'], health['M']))
-	rule = np.append(rule,ctrl.Rule(exercise['M'] & sleep['H'] & eat['H'], health['H']))
-	rule = np.append(rule,ctrl.Rule(exercise['H'] & sleep['H'] & eat['H'], health['H']))
+	rule = np.append(rule, ctrl.Rule(exercise['L'] & sleep['L'] & eat['L'], health['L']))
+	rule = np.append(rule, ctrl.Rule(exercise['M'] & sleep['L'] & eat['L'], health['L']))
+	rule = np.append(rule, ctrl.Rule(exercise['H'] & sleep['L'] & eat['L'], health['L']))
+	rule = np.append(rule, ctrl.Rule(exercise['L'] & sleep['M'] & eat['L'], health['L']))
+	rule = np.append(rule, ctrl.Rule(exercise['M'] & sleep['M'] & eat['L'], health['M']))
+	rule = np.append(rule, ctrl.Rule(exercise['H'] & sleep['M'] & eat['L'], health['M']))
+	rule = np.append(rule, ctrl.Rule(exercise['L'] & sleep['H'] & eat['L'], health['L']))
+	rule = np.append(rule, ctrl.Rule(exercise['M'] & sleep['H'] & eat['L'], health['M']))
+	rule = np.append(rule, ctrl.Rule(exercise['H'] & sleep['H'] & eat['L'], health['M']))
+	rule = np.append(rule, ctrl.Rule(exercise['L'] & sleep['L'] & eat['M'], health['L']))
+	rule = np.append(rule, ctrl.Rule(exercise['M'] & sleep['L'] & eat['M'], health['M']))
+	rule = np.append(rule, ctrl.Rule(exercise['H'] & sleep['L'] & eat['M'], health['M']))
+	rule = np.append(rule, ctrl.Rule(exercise['L'] & sleep['M'] & eat['M'], health['M']))
+	rule = np.append(rule, ctrl.Rule(exercise['M'] & sleep['M'] & eat['M'], health['H']))
+	rule = np.append(rule, ctrl.Rule(exercise['H'] & sleep['M'] & eat['M'], health['H']))
+	rule = np.append(rule, ctrl.Rule(exercise['L'] & sleep['H'] & eat['M'], health['M']))
+	rule = np.append(rule, ctrl.Rule(exercise['M'] & sleep['H'] & eat['M'], health['H']))
+	rule = np.append(rule, ctrl.Rule(exercise['H'] & sleep['H'] & eat['M'], health['H']))
+	rule = np.append(rule, ctrl.Rule(exercise['L'] & sleep['L'] & eat['H'], health['L']))
+	rule = np.append(rule, ctrl.Rule(exercise['M'] & sleep['L'] & eat['H'], health['M']))
+	rule = np.append(rule, ctrl.Rule(exercise['H'] & sleep['L'] & eat['H'], health['M']))
+	rule = np.append(rule, ctrl.Rule(exercise['L'] & sleep['M'] & eat['H'], health['M']))
+	rule = np.append(rule, ctrl.Rule(exercise['M'] & sleep['M'] & eat['H'], health['H']))
+	rule = np.append(rule, ctrl.Rule(exercise['H'] & sleep['M'] & eat['H'], health['H']))
+	rule = np.append(rule, ctrl.Rule(exercise['L'] & sleep['H'] & eat['H'], health['M']))
+	rule = np.append(rule, ctrl.Rule(exercise['M'] & sleep['H'] & eat['H'], health['H']))
+	rule = np.append(rule, ctrl.Rule(exercise['H'] & sleep['H'] & eat['H'], health['H']))
 
 	health_calc = ctrl.ControlSystem(rule)
 
-	print "rule base done"
 	percentage = ctrl.ControlSystemSimulation(health_calc)
-	print "control system defined"
-	# percentage.input['sleep'] = get_total_sum(Y[0])
-	# percentage.input['eat'] = get_total_interval(Y[1])
-	percentage.input['sleep'] = 500                # test
-	percentage.input['eat'] = 100
-	percentage.input['exercise'] = 1440
-	print "inerval calculated"
-	# percentage.input['exercise'] = get_total_sum(Y[2])
+
+	percentage.input['sleep'] = get_total_sum(Y[0])
+	percentage.input['eat'] = get_total_interval(Y[1])
+	percentage.input['exercise'] = get_total_sum(Y[2])
 	percentage.compute()
-	print "ans computed"
 	z = percentage.output['health']
+
 	print z
+
 	return z
 
 def calculate_work(Y):
 
-	tech    = ctrl.Antecedent(np.arange(0, 1440, 1), 'tech')
+	tech    = ctrl.Antecedent(np.arange(0, 1440, 1),    'tech')
 	leisure = ctrl.Antecedent(np.arange(0, 1440, 1), 'leisure')
-	work 	= ctrl.Consequent(np.arange(0,  100, 1), 'work')
+	work 	= ctrl.Consequent(np.arange(0,  100, 1),    'work')
 
 	tech['L']    = fuzz.trapmf(   tech.universe, [  0,  0, 460, 720])                           #change the vlaues
 	tech['M']    = fuzz.trapmf(   tech.universe, [310,570, 870,1130])
@@ -109,7 +105,7 @@ def calculate_work(Y):
 	leisure['H'] = fuzz.trapmf(leisure.universe, [ 80,100,1440,1440])	
 	work['L']    = fuzz.trapmf(   work.universe, [  0,  0,  30,  50])
 	work['M']    = fuzz.trapmf(   work.universe, [  5, 35,  65,  90])
-	work['H']    = fuzz.trapmf(   work.universe, [ 50, 70, 100, 100])
+	work['H']    = fuzz.trapmf(   work.universe, [ 60, 70, 100, 100])
 
 	rule = []
 
@@ -131,14 +127,14 @@ def calculate_work(Y):
 	percentage.input['leisure'] = get_total_sum(Y[1])
 	percentage.compute()
 	z = percentage.output['work']
-	print z
+
 	return z
 
 def calculate_social(Y):
 
 	interaction = ctrl.Antecedent(np.arange(0, 1440, 1), 'interaction')
 	online      = ctrl.Antecedent(np.arange(0, 1440, 1),      'online')
-	social      = ctrl.Consequent(np.arange(0,  100, 1),        'work')
+	social      = ctrl.Consequent(np.arange(0,  100, 1),      'social')
 
 	interaction['L'] = fuzz.trapmf(interaction.universe, [  0,  0, 460, 720])             #change the vlaues
 	interaction['M'] = fuzz.trapmf(interaction.universe, [310,570, 870,1130])
@@ -148,7 +144,7 @@ def calculate_social(Y):
 	online['H']      = fuzz.trapmf(		online.universe, [ 80,100,1440,1440])	
 	social['L']      = fuzz.trapmf(		social.universe, [  0,  0,  30,  50])
 	social['M'] 	 = fuzz.trapmf(		social.universe, [  5, 35,  65,  90])
-	social['H'] 	 = fuzz.trapmf(		social.universe, [ 50, 70, 100, 100])
+	social['H'] 	 = fuzz.trapmf(		social.universe, [ 60, 70, 100, 100])
 
 	rule = []
 
@@ -171,7 +167,78 @@ def calculate_social(Y):
 	percentage.compute()
 	z = percentage.output['social']
 	
-	return z	
+	return z
+
+def calculate_total(Y):
+
+	health = ctrl.Antecedent(np.arange(0, 100, 1), 'health')
+	work   = ctrl.Antecedent(np.arange(0, 100, 1),   'work')
+	social = ctrl.Antecedent(np.arange(0, 100, 1), 'social')
+	total  = ctrl.Consequent(np.arange(0, 100, 1),  'total')
+
+	health['L'] = fuzz.trapmf(health.universe, [  0,  0,  30,  50])
+	health['M'] = fuzz.trapmf(health.universe, [  5, 35,  65,  90])
+	health['H'] = fuzz.trapmf(health.universe, [ 60, 70, 100, 100])
+	work['L']   = fuzz.trapmf(  work.universe, [  0,  0,  30,  50])
+	work['M'] 	= fuzz.trapmf(  work.universe, [  5, 35,  65,  90])
+	work['H'] 	= fuzz.trapmf(  work.universe, [ 60, 70, 100, 100])
+	social['L'] = fuzz.trapmf(social.universe, [  0,  0,  30,  50])
+	social['M'] = fuzz.trapmf(social.universe, [  5, 35,  65,  90])
+	social['H'] = fuzz.trapmf(social.universe, [ 60, 70, 100, 100])
+	total['L']  = fuzz.trapmf( total.universe, [  0,  0,  30,  50])
+	total['M']  = fuzz.trapmf( total.universe, [  5, 35,  65,  90])
+	total['H']  = fuzz.trapmf( total.universe, [ 60, 70, 100, 100])
+
+	rule = []
+
+	rule = np.append(rule,ctrl.Rule(health['L'] & work['L'] & social['L'], total['L']))
+	rule = np.append(rule,ctrl.Rule(health['M'] & work['L'] & social['L'], total['L']))
+	rule = np.append(rule,ctrl.Rule(health['H'] & work['L'] & social['L'], total['L']))
+	rule = np.append(rule,ctrl.Rule(health['L'] & work['M'] & social['L'], total['L']))
+	rule = np.append(rule,ctrl.Rule(health['M'] & work['M'] & social['L'], total['M']))
+	rule = np.append(rule,ctrl.Rule(health['H'] & work['M'] & social['L'], total['M']))
+	rule = np.append(rule,ctrl.Rule(health['L'] & work['H'] & social['L'], total['M']))
+	rule = np.append(rule,ctrl.Rule(health['M'] & work['H'] & social['L'], total['M']))
+	rule = np.append(rule,ctrl.Rule(health['H'] & work['H'] & social['L'], total['M']))
+	rule = np.append(rule,ctrl.Rule(health['L'] & work['L'] & social['M'], total['L']))
+	rule = np.append(rule,ctrl.Rule(health['M'] & work['L'] & social['M'], total['H']))
+	rule = np.append(rule,ctrl.Rule(health['H'] & work['L'] & social['M'], total['H']))
+	rule = np.append(rule,ctrl.Rule(health['L'] & work['M'] & social['M'], total['H']))
+	rule = np.append(rule,ctrl.Rule(health['M'] & work['M'] & social['M'], total['H']))
+	rule = np.append(rule,ctrl.Rule(health['H'] & work['M'] & social['M'], total['H']))
+	rule = np.append(rule,ctrl.Rule(health['L'] & work['H'] & social['M'], total['H']))
+	rule = np.append(rule,ctrl.Rule(health['M'] & work['H'] & social['M'], total['H']))
+	rule = np.append(rule,ctrl.Rule(health['H'] & work['H'] & social['M'], total['H']))
+	rule = np.append(rule,ctrl.Rule(health['L'] & work['L'] & social['H'], total['M']))
+	rule = np.append(rule,ctrl.Rule(health['M'] & work['L'] & social['H'], total['H']))
+	rule = np.append(rule,ctrl.Rule(health['H'] & work['L'] & social['H'], total['H']))
+	rule = np.append(rule,ctrl.Rule(health['L'] & work['M'] & social['H'], total['M']))
+	rule = np.append(rule,ctrl.Rule(health['M'] & work['M'] & social['H'], total['H']))
+	rule = np.append(rule,ctrl.Rule(health['H'] & work['M'] & social['H'], total['H']))
+	rule = np.append(rule,ctrl.Rule(health['L'] & work['H'] & social['H'], total['H']))
+	rule = np.append(rule,ctrl.Rule(health['M'] & work['H'] & social['H'], total['H']))
+	rule = np.append(rule,ctrl.Rule(health['H'] & work['H'] & social['H'], total['H']))
+
+	total_calc = ctrl.ControlSystem(rule)
+
+	percentage = ctrl.ControlSystemSimulation(total_calc)
+	
+	percentage.input['health'] = get_total_sum(Y[0])
+	percentage.input['work'] = get_total_sum(Y[1])
+	percentage.input['social'] = get_total_sum(Y[2])
+	percentage.compute()
+	z = percentage.output['total']
+	
+	return z
+
+def calculate(Y):
+
+	health = calculate_health(Y[0:2])
+	work   = calculate_work(Y[3:4])
+	social = calculate_social(Y[4:5])
+	total  = calculate_total([health, work, social])
+
+	return total
 
 def cummumlative_data(Y):
 
@@ -191,7 +258,7 @@ def main():
 		uuid = bfile[i]
 		print uuid
 		(X,Y,M,timestamps,feature_names,label_names) = read_user_data(uuid)
-		ans = calculate_health([Y[:, 5], Y[:, 36], Y[:, 30]])
+		ans = calculate([[1],[1],[1],[1],[1],[1],[1],[1],[1]]) # erraneous
 
 if __name__ == '__main__':
 	main()
