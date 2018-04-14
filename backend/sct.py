@@ -247,7 +247,43 @@ def cummumlative_data(Y):
 				data[i] = 1
 				break
 
-	return data		
+	return data
+
+def all_data(Y, label_names):
+
+	print Y.shape
+	h = [ ['LYING_DOWN', 'SLEEPING'], ['FIX_restaurant', 'EATING'], 
+			['FIX_running', 'FIX_walking', 'BICYCLING', 'AT_THE_GYM', 
+			'OR_exercise']]
+	w = [['IN_CLASS', 'IN_A_MEETING', 'LOC_main_workplace', 'COMPUTER_WORK', 'AT_SCHOOL'], 
+			['WATCHING_TV', 'SINGING', 'SHOPPING']]
+	s =[['AT_A_PARTY', 'TALKING', 'WITH_CO-WORKERS', 'WITH_FRIENDS'], ['SURFING_THE_INTERNET',
+		 'PHONE_IN_HAND']]	
+
+	feature = [h, w, s]
+
+	ans =[]
+	for k in range(len(feature)):
+		activity = feature[k]
+		for i in range(len(activity)):
+			labels = activity[i]
+			temp =[]
+			for j in range(len(labels)):
+				print labels[j]
+				ind = label_names.index(labels[j])
+				temp.append(Y[:,ind])
+			temp = np.array(temp)	
+			temp = temp.transpose()
+			temp = cummumlative_data(temp)
+			ans.append(temp)
+
+	ans = np.array(ans)	
+	print type(ans)
+	#dft = pd.DataFrame(ans[2],columns = ['A'],index=pd.date_range('20130101',periods=1440,freq='T'))
+	#res = sm.tsa.seasonal_decompose(dft.A, freq=60)
+	#res.plot()
+	#plt.show()	
+	return ans.transpose()		
 
 def main():
 	bfile = np.array(read_csv('id.csv',sep='\n',header=None)).flatten()
@@ -256,6 +292,7 @@ def main():
 		uuid = bfile[i]
 		print uuid
 		(X,Y,M,timestamps,feature_names,label_names) = read_user_data(uuid)
+		dat = all_data(Y[0:1440, :], label_names)
 		ans = calculate([[Y[:,label_names.index('SLEEPING')],
 						  Y[:,label_names.index('EATING')],
 						  Y[:,label_names.index('FIX_walking')]],
